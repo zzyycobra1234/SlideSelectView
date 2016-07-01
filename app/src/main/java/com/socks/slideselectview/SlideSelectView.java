@@ -61,6 +61,7 @@ public class SlideSelectView extends View {
     //文字宽度
     private float textWidth;
     private float percentageTextWidth;
+
     //当前大球距离最近的位置
     private int currentPosition;
     //小圆之间的间距
@@ -81,7 +82,7 @@ public class SlideSelectView extends View {
     private int selectedColor = 0xff359EDA;
     // 大圆右边的颜色
     private int unSelectedColor = 0xFFC7C7C7;
-
+    private int percentage;
 
     public SlideSelectView(Context context) {
         this(context, null);
@@ -150,14 +151,14 @@ public class SlideSelectView extends View {
         String currentPercentage = null;
 
         float lineWidth = (mWidth - MARGEN_LINE) - MARGEN_LINE;
-        float seletedWidth = bigCircleX - MARGEN_LINE;
+        float selectedWidth = bigCircleX - MARGEN_LINE;
 
         NumberFormat formatter = new DecimalFormat("0%");
-        Double x = new Double(seletedWidth / lineWidth);
-        currentPercentage = formatter.format(x);
+        double tempPercentage = (selectedWidth / lineWidth);
+        currentPercentage = formatter.format(tempPercentage);
 
         percentageTextWidth = mTextPaint.measureText(currentPercentage);
-
+        percentage = Integer.valueOf(currentPercentage.substring(0, currentPercentage.length() - 1));
         return currentPercentage;
     }
 
@@ -289,7 +290,7 @@ public class SlideSelectView extends View {
                     //                    valueAnimator.setDuration(100);
                     //                    valueAnimator.start();
                     if (null != selectListener) {
-                        selectListener.onSelect(currentPosition);
+                        selectListener.onSelect(percentage);
                     }
                 }
 
@@ -359,7 +360,7 @@ public class SlideSelectView extends View {
     }
 
     public interface onSelectListener {
-        public void onSelect(int index);
+        void onSelect(int percentage);
     }
 
 }
