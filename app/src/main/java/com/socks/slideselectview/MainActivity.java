@@ -18,11 +18,10 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         slideSelectView = (SlideSelectView) findViewById(R.id.slideSelectView);
-
         //		textStrings = new String[]{"汇率 1.1234", "汇率 1.1334", "汇率 1.1434", "汇率 1.1534",
         //				"汇率 1.1734"};
         //		slideSelectView.setString(textStrings);
-
+        slideSelectView.setPercentage(24);
         slideSelectView.setOnSelectListener(new SlideSelectView.onSelectListener() {
             @Override
             public void onSelect(int percentage) {

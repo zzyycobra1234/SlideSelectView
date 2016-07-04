@@ -116,7 +116,7 @@ public class SlideSelectView extends View {
         mTextPaint.setFakeBoldText(true);
 
         currentPosition = countOfSmallCircle / 2;
-        setPercentage();
+        setScalePercentage();
 
     }
 
@@ -136,7 +136,7 @@ public class SlideSelectView extends View {
     //
     //    }
 
-    private void setPercentage() {
+    private void setScalePercentage() {
         textPercentage = new String[]{"0", "25", "50", "75", "100"};
         textWidth = mScaleTextPaint.measureText(textPercentage[0]);
 
@@ -162,6 +162,12 @@ public class SlideSelectView extends View {
         return currentPercentage;
     }
 
+
+    public void setPercentage(int percentage) {
+        this.percentage = percentage;
+        //        float lineWidth = (mWidth - MARGEN_LINE) - MARGEN_LINE;
+        //        bigCircleX = percentage * lineWidth  / 100 + MARGEN_LINE;
+    }
 
     /**
      * 设置监听器
@@ -313,7 +319,14 @@ public class SlideSelectView extends View {
             circlesX[i] = i * distanceX + MARGEN_LINE;
         }
 
-        bigCircleX = circlesX[currentPosition];
+//        bigCircleX = circlesX[currentPosition];
+
+//        if (percentage != 0) {
+            float lineWidth = (mWidth - MARGEN_LINE) - MARGEN_LINE;
+            bigCircleX = percentage * lineWidth / 100 + MARGEN_LINE;
+//        }
+
+
     }
 
     @Override
@@ -362,5 +375,14 @@ public class SlideSelectView extends View {
     public interface onSelectListener {
         void onSelect(int percentage);
     }
+
+    public int getCurrentPosition() {
+        return currentPosition;
+    }
+
+    public void setCurrentPosition(int currentPosition) {
+        this.currentPosition = currentPosition;
+    }
+
 
 }
